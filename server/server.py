@@ -2,7 +2,8 @@ import http.server
 import ssl
 import os
 
-PORT = int(os.environ.get('PORT', 8000))
+HTTPS_PORT = int(os.environ.get('PORT', 443))
+HTTP_PORT = int(os.environ.get('PORT', 8000))
 DIRECTORY = os.path.join(os.path.dirname(__file__), "../static")
 
 # Read the certificate path from an environment variable
@@ -21,16 +22,25 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 def run(server_class=http.server.HTTPServer, handler_class=CustomHTTPRequestHandler):
     os.chdir(DIRECTORY)
-    httpd = server_class(("", PORT), handler_class)
+    httpd = server_class(("", HTTPS_PORT), handler_class)
 
-    # Create SSL context
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    context.load_cert_chain(certfile=CERTIFICATE)
+    port = HTTPS_PORT
+    proto = "HTTPS"
+
+    try:
+        # Create SSL context
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.load_cert_chain(certfile=CERTIFICATE)
+        httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
+    except:
+        print(f"Could not Find certificate, running HTTP")
+        port = HTTP_PORT
+        proto = "HTTP"
+        httpd = server_class(("", HTTP_PORT), handler_class)
 
     # Wrap the server's socket with the SSL context
-    httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
 
-    print(f"Serving HTTPS on port {PORT} (https://localhost:{PORT})")
+    print(f"Serving {proto} on port {port} (https://localhost:{port})")
     httpd.serve_forever()
 
 

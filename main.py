@@ -1,9 +1,9 @@
-from server import server
+from server import server, http_server
 
 
 def main():
     print("Starting the web server...")
-    server.run()
+    http_server.run()
 
 
 if __name__ == "__main__":
