@@ -22,7 +22,6 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 def run(server_class=http.server.HTTPServer, handler_class=CustomHTTPRequestHandler):
     os.chdir(DIRECTORY)
-    httpd = server_class(("", HTTPS_PORT), handler_class)
 
     port = HTTPS_PORT
     proto = "HTTPS"
@@ -31,6 +30,7 @@ def run(server_class=http.server.HTTPServer, handler_class=CustomHTTPRequestHand
         # Create SSL context
         context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         context.load_cert_chain(certfile=CERTIFICATE)
+        httpd = server_class(("", HTTPS_PORT), handler_class)
         httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
     except:
         print(f"Could not Find certificate, running HTTP")
