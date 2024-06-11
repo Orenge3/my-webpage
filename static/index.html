@@ -5,55 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oren Smirnov - Software Engineer</title>
     <style>
-        /* Define constants */
-        :root {
-            --background-color: #f4f4f4;
-            --primary-color: #007bff; /* blue */
-            --secondary-color: #333;
-            --text-color: #fff;
-            --container-width: 800px;
-            --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Apply styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
+            background-color: #f4f4f4;
         }
         header {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
+            background-color: #333;
+            color: #fff;
             padding: 1em 0;
             text-align: center;
         }
         .container {
-            max-width: var(--container-width);
+            max-width: 800px;
             margin: 2em auto;
             padding: 1em;
-            background: var(--text-color);
-            box-shadow: var(--box-shadow);
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: var(--primary-color);
+            color: #333;
         }
         p {
             margin: 0.5em 0;
         }
         .section-title {
             margin-top: 2em;
-            color: var(--primary-color);
+            color: #666;
         }
         footer {
             text-align: center;
             padding: 1em 0;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
+            background-color: #333;
+            color: #fff;
             position: fixed;
             width: 100%;
             bottom: 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -76,6 +72,11 @@
                 <li>Software Development</li>
                 <li>Artificial Intelligence</li>
             </ul>
+        </section>
+        <section>
+            <h2 class="section-title">My CV</h2>
+            <p>Download my CV <a href="cv.pdf" download>here</a>.</p>
+            <!-- Replace "cv.pdf" with the actual filename of your CV -->
         </section>
     </div>
     <footer>
